@@ -6,6 +6,7 @@ const provider = new ethers.providers.Web3Provider(window.ethereum);
 function App() {
   const [ethBalance, setEthBalance] = useState([]);
   const [transactionHistory, setTransactionHistory] = useState([]);
+  const [isConnected, setIsConnected] = useState(false);
 
   const getAdress = () => {
     return provider.provider.selectedAddress;
@@ -14,14 +15,15 @@ function App() {
   const loadWeb3 = async () => {
     if (window.ethereum) {
       await window.ethereum.enable();
+      await setIsConnected(true);
       const adress = getAdress();
+      await getTransactions();
       const balance = await provider.getBalance(adress);
       return setEthBalance(ethers.utils.formatEther(balance));
     } else {
       setEthBalance(`Please install metamask`);
     }
   };
-
 
   const getTransactions = async () => {
     const provider = new ethers.providers.EtherscanProvider();
@@ -32,8 +34,9 @@ function App() {
 
   useEffect(() => {
     loadWeb3();
-    getTransactions();
-  });
+  }, []);
+
+if(!isConnected) return null
 
   return (
     <div className="App">
