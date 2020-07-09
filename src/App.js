@@ -36,7 +36,6 @@ function App() {
     loadWeb3();
   }, []);
 
-if(!isConnected) return null
 
   return (
     <div className="App">
