@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import { ethers } from "ethers";
+import MAINNET_TOKENS from './constants/tokens/mainnet'
+
+
+
 const provider = new ethers.providers.Web3Provider(window.ethereum);
+const tokenLogo = `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/${address}/logo.png`
 
 function App() {
   const [ethBalance, setEthBalance] = useState([]);
@@ -20,6 +25,7 @@ function App() {
   };
 
   useEffect(() => {
+    console.log(MAINNET_TOKENS)
     const loadWeb3 = async () => {
       if (window.ethereum) {
         await window.ethereum.enable();
