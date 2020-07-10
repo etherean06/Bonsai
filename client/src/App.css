@@ -1,5 +1,6 @@
-.App {
-  text-align: center;
+.title {
+  height: 10em;
+  position: relative;
 }
 
 .App-logo {
